@@ -9,6 +9,6 @@ import (
 func SetupAPIRoutes(api fiber.Router) {
 
 	api.Post("/login", handler.Login)
-	api.Get("/items", )
+	api.Get("/items", handler.GetItemsByCode)
 
 }
