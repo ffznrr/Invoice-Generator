@@ -1,0 +1,38 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: app_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./server
+
+      dockerfile: Dockerfile
+    container_name: go_backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    env_file:
+      - ./server/.env
+
+  frontend:
+    build:
+      context: ./client
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:8080
+
+volumes:
+  pgdata:
