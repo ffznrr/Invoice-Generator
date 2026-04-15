@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"log"
 	"strings"
 
 	"invoice_gen_be/internal/config"
@@ -24,8 +25,24 @@ func JWTProtected() fiber.Handler {
 		})
 
 		if err != nil || !token.Valid {
-			return c.Status(401).JSON(fiber.Map{"error": "Invalid token"})
+			return c.Status(401).JSON(fiber.Map{"error": "UNAUTHORIZED"})
 		}
+
+		claims, ok := token.Claims.(jwt.MapClaims)
+		if !ok {
+			return c.Status(401).JSON(fiber.Map{"error": "UNAUTHORIZED"})
+		}
+
+		userID := claims["user_id"]
+		username := claims["username"]
+
+	log.Println(" middleware username")
+	log.Println(username)
+	log.Println(" middleware username")
+
+
+		c.Locals("user_id", userID)
+		c.Locals("username", username)
 
 		return c.Next()
 	}

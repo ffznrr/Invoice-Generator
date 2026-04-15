@@ -10,7 +10,7 @@ type Invoice struct {
 	ReceiverName    string
 	ReceiverAddress string
 	TotalAmount     int
-	CreatedBy       uint
+	CreatedBy       string
 	CreatedAt       time.Time
 
 	Details []InvoiceDetail `gorm:"foreignKey:InvoiceID"`

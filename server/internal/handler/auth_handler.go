@@ -37,8 +37,9 @@ func Login(c *fiber.Ctx) error {
 
 	claims := jwt.MapClaims{
 		"id":   user.ID,
+		"username": user.Username,
 		"role": user.Role,
-		"exp":  time.Now().Add(time.Hour * 24).Unix(),
+		"exp":  time.Now().Add(time.Hour * 1).Unix(),
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
