@@ -19,6 +19,8 @@ services:
     container_name: go_backend
     ports:
       - "8080:8080"
+    volumes:
+      - ./server:/app
     depends_on:
       - postgres
     env_file:
