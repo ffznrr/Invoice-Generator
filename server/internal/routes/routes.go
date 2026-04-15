@@ -8,4 +8,6 @@ func SetupRoutes(app *fiber.App) {
 	api := app.Group("/api")
 
 	SetupAPIRoutes(api)
+
+	
 }
