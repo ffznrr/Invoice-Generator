@@ -3,6 +3,7 @@ package main
 import (
 	"invoice_gen_be/internal/database"
 	"invoice_gen_be/internal/routes"
+	"invoice_gen_be/internal/seed"
 	"log"
 
 	"github.com/gofiber/fiber/v2"
@@ -23,6 +24,9 @@ func main() {
 		return c.SendString("Server Is Running..")
 	})
 
+    database.Migrate()
+
+    seed.SeedItems()
 
 	routes.SetupRoutes(app)
 
