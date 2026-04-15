@@ -3,6 +3,7 @@ package main
 import (
 	"invoice_gen_be/internal/database"
 	"invoice_gen_be/internal/routes"
+	"invoice_gen_be/internal/seed"
 	"log"
 
 	"github.com/gofiber/fiber/v2"
@@ -19,10 +20,11 @@ func main() {
 
 	app := fiber.New()
 
+    seed.SeedItems()
+
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("Server Is Running..")
 	})
-
 
 	routes.SetupRoutes(app)
 
