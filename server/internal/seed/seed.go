@@ -11,7 +11,6 @@ func SeedItems() {
 	database.DB.Model(&model.Item{}).Count(&count)
 
 	if count > 0 {
-		log.Println("🌱 Seed skipped")
 		return
 	}
 
@@ -25,5 +24,5 @@ func SeedItems() {
 		log.Fatal("Seed failed:", err)
 	}
 
-	log.Println("🌱 Seeder items success")
+	log.Println("Seeder items success")
 }

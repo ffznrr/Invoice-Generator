@@ -26,6 +26,7 @@ func main() {
 		return c.SendString("Server Is Running..")
 	})
 
+
 	routes.SetupRoutes(app)
 
 	log.Fatal(app.Listen(":8080"))
